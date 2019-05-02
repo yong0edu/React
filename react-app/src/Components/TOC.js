@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 
 
+
+
 class TOC extends Component {
     render(){
         var data = this.props.data;
@@ -12,9 +14,10 @@ class TOC extends Component {
                 <li key={data[i].id}>
                     <a 
                         href={"/content"+data[i].id}
-                        onClick={function(e){
+                        onClick={function(id, e){
                             e.preventDefault();
-                        }}>
+                            this.props.onChangePage(id);
+                        }.bind(this, data[i].id)}>
                         {data[i].title}
                     </a>
                 </li>
