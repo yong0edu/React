@@ -2,11 +2,11 @@ import React,{Component} from 'react';
 import './App.css';
 
 class Subject extends Component {
-  render(){
+  render(title, sub){
     return (
       <header>
-        <h1>WEB</h1>
-        World Wide Web!
+        <h1>{this.props.title}</h1>
+        {this.props.sub}
       </header>
     );
   }
@@ -27,11 +27,11 @@ class TOC extends Component {
 }
 
 class Content extends Component {
-  render(){
+  render(title, desc){
     return(
       <article>
-        <h2>HTML</h2>
-        HTML is .....
+        <h2>{this.props.title}</h2>
+        {this.props.desc}
       </article>
     );
   }
@@ -41,9 +41,10 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <Subject></Subject>
+        <Subject title="HTML" sub="World Wide Web!"></Subject>
+        <Subject title="React" sub="For UI"></Subject>
         <TOC></TOC>
-        <Content></Content>
+        <Content title="HTML" desc="HTML is ...."></Content>
       </div>
     );
   }
