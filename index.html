@@ -49,23 +49,28 @@
             }
 
             var mode = "welcome"
-            var _articleTitle = '';
-            var _articleDesc = '';
-            if (mode === 'welcome'){
-                _articleTitle = 'Welcome';
-                _articleDesc = 'Hello, WEB';
-            } else if(mode === 'read'){
-                _articleTitle = 'HTML';
-                _articleDesc = 'HTML is ....'
+
+            function render(){
+                var _articleTitle = '';
+                var _articleDesc = '';
+                if (mode === 'welcome'){
+                    _articleTitle = 'Welcome';
+                    _articleDesc = 'Hello, WEB';
+                } else if(mode === 'read'){
+                    _articleTitle = 'HTML';
+                    _articleDesc = 'HTML is ....'
+                }
+
+
+                
+                document.querySelector('#app').innerHTML = (
+                    headerTag('WEB', 'World Wide Web!') +  
+                    navTag() +
+                    articleTag(_articleTitle, _articleDesc)
+                )
             }
-
-
+            render();
             
-            document.querySelector('#app').innerHTML = (
-                headerTag('WEB', 'World Wide Web!') +  
-                navTag() +
-                articleTag(_articleTitle, _articleDesc)
-            )
 
         </script>
     </body>
