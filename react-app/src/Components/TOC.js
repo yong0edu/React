@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 
 class TOC extends Component {
-    render(data){
+    render(){
         var data = this.props.data;
         var lists = [];
         var i = 0;
