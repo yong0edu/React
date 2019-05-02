@@ -11,7 +11,10 @@ class TOC extends Component {
             lists.push(
                 <li key={data[i].id}>
                     <a 
-                        href={"/content"+data[i].id}>
+                        href={"/content"+data[i].id}
+                        onClick={function(e){
+                            e.preventDefault();
+                        }}>
                         {data[i].title}
                     </a>
                 </li>
