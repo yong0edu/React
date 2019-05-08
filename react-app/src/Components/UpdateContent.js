@@ -1,20 +1,31 @@
 import React, {Component} from 'react';
 
 class UpdateContent extends Component {
+  // shouldComponentUpdate(newProps, newState){
+  //   console.log('should = = = = = = == == UpdateContent')
+  //   if(newProps.data === this.props.data){
+  //     return false;
+  //   }
+  //   return true;
+  // }
     constructor(props){
       super(props);
       this.state = {
+        id : this.props.data.id,
         title : this.props.data.title,
         desc : this.props.data.desc
       }
       this.inputFormHandler = this.inputFormHandler.bind(this)
     }
+    
     inputFormHandler(e){
       this.setState({
         [e.target.name]: e.target.value
       })
     }
+    
     render(){
+      console.log('render = = = == = =UpdateContent Render!!!!')
       return(
         <article>
           <h2>Update</h2>
@@ -22,8 +33,9 @@ class UpdateContent extends Component {
             onSubmit={function(e){
               e.preventDefault();
               this.props.onSubmit(
-                e.target.title.value,
-                e.target.desc.value
+                this.state.id,
+                this.state.title,
+                this.state.desc
               );
             }.bind(this)}
             >

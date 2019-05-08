@@ -47,25 +47,34 @@ class App extends Component {
     } else if (this.state.mode === 'create'){
       _article = <CreateContent onSubmit={function(_title, _desc){
         this.max_content_id = this.max_content_id + 1
-        var add_contents = this.state.contents.concat(
-          {id: this.max_content_id, title:_title, desc:_desc}
-        )
+        var add_contents = Array.from(this.state.contents)
+        add_contents.push({id: this.max_content_id, title:_title, desc:_desc})
         this.setState({
+          mode: 'read',
+          selected_id: this.max_content_id,
           contents: add_contents
         })
       }.bind(this)}></CreateContent>
     } else if (this.state.mode === 'update'){
       _content = this.getReadContent();
-      _article = <UpdateContent data={_content} onSubmit={function(_title, _desc){
-        this.max_content_id = this.max_content_id + 1
-        var add_contents = this.state.contents.concat(
-          {id: this.max_content_id, title:_title, desc:_desc}
-        )
-        this.setState({
-          contents: add_contents
-        })
-      }.bind(this)}></UpdateContent>
-    }
+      _article = <UpdateContent data={_content} 
+                                onSubmit={function(_id, _title, _desc){   
+                                  var contents = Array.from(this.state.contents)
+                                  var i = 0;
+                                  while (i < contents.length){
+                                    if (_id === contents[i].id){
+                                      contents[i] = {id: _id, title: _title, desc:_desc}
+                                      break;
+                                    }
+                                    i = i + 1;
+                                  }
+                                  this.setState({
+                                    mode: 'read',
+                                    selected_id: _id,
+                                    contents: contents
+                                  })
+                                }.bind(this)}></UpdateContent>
+                              }
     return _article;
   }
   render(){
