@@ -27,13 +27,13 @@ class App extends Component {
   getReadContent(){
     var i = 0;
       while(i < this.state.contents.length){
-        var data = this.state.contents
-        if(this.state.selected_id === data[i].id){
+        var data = this.state.contents[i];
+        if(this.state.selected_id === data.id){
+          return data;
           break;
         }
         i = i + 1;
       }
-      return data;
   }
   getContent(){
     var _title, _desc, _article = null;
@@ -55,7 +55,8 @@ class App extends Component {
         })
       }.bind(this)}></CreateContent>
     } else if (this.state.mode === 'update'){
-      _article = <UpdateContent onSubmit={function(_title, _desc){
+      _content = this.getReadContent();
+      _article = <UpdateContent data={_content} onSubmit={function(_title, _desc){
         this.max_content_id = this.max_content_id + 1
         var add_contents = this.state.contents.concat(
           {id: this.max_content_id, title:_title, desc:_desc}
