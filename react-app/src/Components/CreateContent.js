@@ -8,11 +8,14 @@ class CreateContent extends Component {
           <form action="/create_process" method="post"
             onSubmit={function(e){
               e.preventDefault();
-              alert('Submit!!!!!!');
+              this.props.onSubmit(
+                e.target.title.value,
+                e.target.desc.value
+              );
             }.bind(this)}
             >
             <p>
-              <input type="text" name="text" placeholder="title"></input>
+              <input type="text" name="title" placeholder="title"></input>
             </p>
             <p>
               <textarea name="desc" placeholder="description"></textarea>
