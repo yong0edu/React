@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import './App.css';
 import TOC from './Components/TOC';
-import Content from './Components/Content';
+import ReadContent from './Components/ReadContent';
+import CreateContent from './Components/CreateContent';
 import Subject from './Components/Subject';
 import Control from './Components/Control';
 
@@ -10,7 +11,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      mode: 'read',
+      mode: 'create',
       subject:{title:'WEB', sub:'World Wide Web!'},
       welcome:{title:'React!', desc:'Hello React!'},
       contents:[
@@ -22,11 +23,11 @@ class App extends Component {
     }
   }
   render(){
-    var _title = '';
-    var _desc = '';
+    var _title, _desc, _article = null;
     if(this.state.mode === 'welcome'){
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
+      _article = <ReadContent title={_title} desc={_desc}></ReadContent>
     } else if (this.state.mode === 'read'){
       var i = 0;
       while(i < this.state.contents.length){
@@ -38,6 +39,9 @@ class App extends Component {
         }
         i = i + 1;
       }
+      _article = <ReadContent title={_title} desc={_desc}></ReadContent>
+    } else if (this.state.mode === 'create'){
+      _article = <CreateContent></CreateContent>
     }
     return (
       <div className="App">
@@ -50,7 +54,6 @@ class App extends Component {
             });
           }.bind(this)}>
         </Subject>
-
         <TOC 
           data={this.state.contents}
           onChangePage={function(id){
@@ -66,7 +69,7 @@ class App extends Component {
               mode:mode
             })
         }.bind(this)}></Control>
-        <Content title={_title} desc={_desc}></Content>
+        {_article}
       </div>
     );
   }
