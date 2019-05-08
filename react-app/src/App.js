@@ -3,6 +3,7 @@ import './App.css';
 import TOC from './Components/TOC';
 import Content from './Components/Content';
 import Subject from './Components/Subject';
+import Control from './Components/Control';
 
 
 class App extends Component {
@@ -49,6 +50,7 @@ class App extends Component {
             });
           }.bind(this)}>
         </Subject>
+
         <TOC 
           data={this.state.contents}
           onChangePage={function(id){
@@ -58,6 +60,12 @@ class App extends Component {
             });
           }.bind(this)}>
         </TOC>
+        <Control 
+          onChangeMode = {function(mode){
+            this.setState({
+              mode:mode
+            })
+        }.bind(this)}></Control>
         <Content title={_title} desc={_desc}></Content>
       </div>
     );
