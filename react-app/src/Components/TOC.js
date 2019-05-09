@@ -14,19 +14,20 @@ class TOC extends Component {
     }
     render(){
         console.log('=====>render');
-        var data = this.props.data;
+        var _data = this.props.data;
+
         var lists = [];
         var i = 0;
-        while (i < data.length){
+        while (i < _data.length){
             lists.push(
-                <li key={data[i].id}>
+                <li key={_data[i].id}>
                     <a 
-                        href={"/content"+data[i].id}
+                        href={"/content"+_data[i].id}
                         onClick={function(id, e){
                             e.preventDefault();
                             this.props.onChangePage(id);
-                        }.bind(this, data[i].id)}>
-                        {data[i].title}
+                        }.bind(this, _data[i].id)}>
+                        {_data[i].title}
                     </a>
                 </li>
             )

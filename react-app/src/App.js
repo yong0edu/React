@@ -74,8 +74,8 @@ class App extends Component {
                                     contents: contents
                                   })
                                 }.bind(this)}></UpdateContent>
-                              }
-    return _article;
+    } 
+    return _article; 
   }
   render(){
     return (
@@ -85,7 +85,8 @@ class App extends Component {
           sub={this.state.subject.sub}
           onChangePage={function(){
             this.setState({
-              mode:'welcome'
+              mode:'welcome',
+              selected_id: null
             });
           }.bind(this)}>
         </Subject>
@@ -100,9 +101,32 @@ class App extends Component {
         </TOC>
         <Control 
           onChangeMode = {function(mode){
-            this.setState({
-              mode:mode
-            })
+            if (mode === 'delete'){
+              if (this.state.selected_id === null){
+                return alert('삭제할 항목을 선택해 주세요');
+              } else if (this.state.selected_id){
+                if(window.confirm('정말로 삭제하시겠습니까?')){
+                  var i = 0;
+                  var content = Array.from(this.state.contents);
+                  while(i < content.length){
+                    if(content[i].id === this.state.selected_id){
+                      content.splice(i, 1);
+                      break;
+                    }
+                    i = i + 1;
+                  }
+                  this.setState({
+                    mode:'welcome',
+                    contents: content
+                  });
+                  alert('삭제되었습니다.');
+                } 
+              }
+            } else {
+              this.setState({
+              mode: mode,
+            });
+          }    
         }.bind(this)}></Control>
         {this.getContent()}
       </div>
